@@ -1,5 +1,5 @@
 import pytest
-#import allure
+import allure
 
 from test_page_object.pages.main_page import MainPage
 from ..data import *
@@ -8,9 +8,9 @@ from test_page_object.locators.main_page_locators import *
 
 class TestMainPage:
 
-   # @allure.title("Проверка вопросов о важном") #декораторы
-   # @allure.description("На главной странице ищем текст с вопросом, кликаем, смотрим выпадающий текст")
-  #  @allure.link(MAIN_URL)
+    @allure.title("Проверка вопросов о важном") #декораторы
+    @allure.description("На главной странице ищем текст с вопросом, кликаем, смотрим выпадающий текст")
+    @allure.link(MAIN_URL)
     @pytest.mark.parametrize(
     "q_num, expected_result",
     [

@@ -1,10 +1,9 @@
 from test_page_object.pages.base_page import BasePage
-from test_page_object.locators.main_page_locators import MainPageLocators
 
 
 class OrderPage(BasePage):
     def take_successful_order(self,
-                              locator_button_order,
+                              locator_button_order_top,
                               locator_button_next,
                               name_locator,
                               name,
@@ -15,9 +14,19 @@ class OrderPage(BasePage):
                               metro_locator,
                               metro,
                               phone_locator,
-                              phone
-                              ):
-        OrderPage.push_buttor_order(self, locator_button_order)
+                              phone,
+                              date_locator,
+                              date_calendar,
+                              rent_locator,
+                              rent_duration,
+                              radio_button,
+                              commentary_locator,
+                              commentary,
+                              button_order,
+                              button_confirmed,
+                              order_text,
+                              modal_locator):
+        OrderPage.push_button(self, locator_button_order_top)
         OrderPage.first_fil(self,
                             name_locator,
                             name,
@@ -29,17 +38,25 @@ class OrderPage(BasePage):
                             metro,
                             phone_locator,
                             phone)
-        OrderPage.push_button_next(self, locator_button_next)
-        OrderPage.second_fil(self)
-        OrderPage.push_buttor_order(self, locator_button_order)
+        OrderPage.push_button(self, locator_button_next)
+        OrderPage.second_fil(self,
+                             date_locator,
+                             date_calendar,
+                             rent_locator,
+                             rent_duration,
+                             radio_button,
+                             commentary_locator,
+                             commentary)
+        OrderPage.push_button(self, button_order)
+        OrderPage.switch_modal(self, modal_locator)
+        OrderPage.push_button(self, button_confirmed)
+        #OrderPage.click_java(self, button_confirmed)
+        return OrderPage.get_text_from_element(self, order_text)
 
-    def push_buttor_order(self, locator_button_order):
-        method_q, locator_q = locator_button_order
+    def push_button(self, locator):
+        method_q, locator_q = locator
         self.click_on_element((method_q, locator_q))
 
-    def push_button_next(self, locator_button_next):
-        method_q, locator_q = locator_button_next
-        self.click_on_element((method_q, locator_q))
 
     def first_fil(self,
                   name_locator,
@@ -65,12 +82,44 @@ class OrderPage(BasePage):
         self.click_on_element((method_q, locator_q))
 
         method_q, locator_q = metro_station_locator
-        #self.click_on_element((method_q, locator_q))
-        element = self.find_element_with_wait((method_q, locator_q))
-        self.driver.execute_script("arguments[0].value = 'Сокольники';", element)
+        self.click_on_element((method_q, locator_q))
 
         method_q, locator_q = phone_locator
         self.set_text_to_element((method_q, locator_q), phone)
 
-    def second_fil(self):
-        pass
+    def second_fil(self,
+                   date_locator,
+                   date_calendar,
+                   rent_locator,
+                   rent_duration,
+                   radio_button,
+                   commentary_locator,
+                   commentary):
+        method_q, locator_q = date_locator
+        self.click_on_element((method_q, locator_q))
+
+        method_q, locator_q = date_calendar
+        self.click_on_element((method_q, locator_q))
+
+        method_q, locator_q = rent_locator
+        self.click_on_element((method_q, locator_q))
+
+        method_q, locator_q = rent_duration
+        self.click_on_element((method_q, locator_q))
+
+        method_q, locator_q = radio_button
+        self.click_on_element((method_q, locator_q))
+
+        method_q, locator_q = commentary_locator
+        self.set_text_to_element((method_q, locator_q), commentary)
+
+    def check(result, expected):
+        return result == expected
+
+
+    def order_page(self,
+                   locator_button_order_top,
+                   locator_scooter):
+        OrderPage.push_button(self, locator_button_order_top)
+        OrderPage.push_button(self, locator_scooter)
+        return self.driver.current_url

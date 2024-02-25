@@ -1,23 +1,23 @@
 import pytest
-#import allure
+import allure
 import time
-
 from test_page_object.pages.order_page import OrderPage
 from ..data import *
 from test_page_object.locators.main_page_locators import *
 from test_page_object.locators.order_page_locators import *
 
+
 class TestOrderPage:
 
     @pytest.mark.parametrize(
-        "q_num, expected_result",
+        "expected_result",
         [
-            (0, OrderAnswer.ANSWER_0)
+            (OrderAnswer.ANSWER_0)
         ]
     )
-    def test_successful_order(self, driver, q_num, expected_result):
+    def gtest_successful_order(self, driver, expected_result):
         main_page = OrderPage(driver)
-        main_page.take_successful_order(MainPageLocators.BUTTON_ORDER_TOP,
+        result = main_page.take_successful_order(MainPageLocators.BUTTON_ORDER_TOP,
                                         OrderPageLocators.BUTTON_NEXT,
                                         OrderPageLocators.NAME_FIELD,
                                         OrderAnswer.NAME_1,
@@ -28,10 +28,23 @@ class TestOrderPage:
                                         OrderPageLocators.METRO_FIELD,
                                         OrderPageLocators.METRO_STATION,
                                         OrderPageLocators.PHONE_FIELD,
-                                        OrderAnswer.PHONE)
+                                        OrderAnswer.PHONE,
+                                        OrderPageLocators.DAY_ORDER,
+                                        OrderPageLocators.DAY_CALENDAR,
+                                        OrderPageLocators.RENT,
+                                        OrderPageLocators.RENT_DURATION,
+                                        OrderPageLocators.COLOR_BLACK,
+                                        OrderPageLocators.COMMENTARY,
+                                        OrderAnswer.COMMENTARY_1,
+                                        OrderPageLocators.BUTTON_ORDER,
+                                        OrderPageLocators.BUTTON_CONFIRMED_YES,
+                                        OrderPageLocators.ORDER_MESSAGE,
+                                        OrderPageLocators.MODAL_FRAME)
+        assert OrderPage.check(result, expected_result)
         time.sleep(5)
 
-
-
-
-
+    def test_logo_scooter(self, driver):
+        main_page = OrderPage(driver)
+        current_page = main_page.order_page(MainPageLocators.BUTTON_ORDER_TOP,
+                             OrderPageLocators.LOGO_SCOOTER)
+        assert current_page == MAIN_URL

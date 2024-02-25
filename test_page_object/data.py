@@ -21,8 +21,7 @@ class OrderAnswer:
     SECOND_NAME_1 = "Петров"
     ADRESS = "Улица такая и дом вот такой"
     PHONE = "88005553535"
-    DATE_ORDER = ""
-    RENT = ""
+    DATE_ORDER = "29.03.2024"
     COMMENTARY_1 = "проба"
 
 MAIN_URL = "https://qa-scooter.praktikum-services.ru/"
