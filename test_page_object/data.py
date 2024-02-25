@@ -25,3 +25,4 @@ class OrderAnswer:
     COMMENTARY_1 = "проба"
 
 MAIN_URL = "https://qa-scooter.praktikum-services.ru/"
+YA_URL = "https://dzen.ru/?yredirect=true"

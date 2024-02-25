@@ -15,7 +15,7 @@ class TestOrderPage:
             (OrderAnswer.ANSWER_0)
         ]
     )
-    def gtest_successful_order(self, driver, expected_result):
+    def test_successful_order(self, driver, expected_result):
         main_page = OrderPage(driver)
         result = main_page.take_successful_order(MainPageLocators.BUTTON_ORDER_TOP,
                                         OrderPageLocators.BUTTON_NEXT,
@@ -48,3 +48,12 @@ class TestOrderPage:
         current_page = main_page.order_page(MainPageLocators.BUTTON_ORDER_TOP,
                              OrderPageLocators.LOGO_SCOOTER)
         assert current_page == MAIN_URL
+
+    def test_logo_ya(self, driver):
+        main_page = OrderPage(driver)
+        main_page.order_page(MainPageLocators.BUTTON_ORDER_TOP,
+                             OrderPageLocators.LOGO_YANDEX)
+        main_window = driver.current_window_handle
+        new_window = [window for window in driver.window_handles if window != main_window][0]
+        driver.switch_to.window(new_window)
+        assert driver.current_url == YA_URL

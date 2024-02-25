@@ -50,7 +50,6 @@ class OrderPage(BasePage):
         OrderPage.push_button(self, button_order)
         OrderPage.switch_modal(self, modal_locator)
         OrderPage.push_button(self, button_confirmed)
-        #OrderPage.click_java(self, button_confirmed)
         return OrderPage.get_text_from_element(self, order_text)
 
     def push_button(self, locator):
