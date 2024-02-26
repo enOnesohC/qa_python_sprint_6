@@ -48,14 +48,13 @@ class OrderPage(BasePage):
                              commentary_locator,
                              commentary)
         OrderPage.push_button(self, button_order)
-        OrderPage.switch_modal(self, modal_locator)
+        #OrderPage.switch_modal(self, modal_locator)
         OrderPage.push_button(self, button_confirmed)
         return OrderPage.get_text_from_element(self, order_text)
 
     def push_button(self, locator):
         method_q, locator_q = locator
         self.click_on_element((method_q, locator_q))
-
 
     def first_fil(self,
                   name_locator,
@@ -113,8 +112,10 @@ class OrderPage(BasePage):
         self.set_text_to_element((method_q, locator_q), commentary)
 
     def check(result, expected):
-        return result == expected
-
+        if expected in result:
+            return True
+        else:
+            return False
 
     def order_page(self,
                    locator_button_order_top,

@@ -40,8 +40,9 @@ class TestOrderPage:
                                         OrderPageLocators.BUTTON_CONFIRMED_YES,
                                         OrderPageLocators.ORDER_MESSAGE,
                                         OrderPageLocators.MODAL_FRAME)
+        print(result)
         assert OrderPage.check(result, expected_result)
-        time.sleep(5)
+
 
     def test_logo_scooter(self, driver):
         main_page = OrderPage(driver)
@@ -56,4 +57,5 @@ class TestOrderPage:
         main_window = driver.current_window_handle
         new_window = [window for window in driver.window_handles if window != main_window][0]
         driver.switch_to.window(new_window)
+        time.sleep(5)
         assert driver.current_url == YA_URL
