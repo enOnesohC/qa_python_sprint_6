@@ -24,8 +24,7 @@ class OrderPage(BasePage):
                               commentary,
                               button_order,
                               button_confirmed,
-                              order_text,
-                              modal_locator):
+                              order_text):
         OrderPage.push_button(self, locator_button_order_top)
         OrderPage.first_fil(self,
                             name_locator,
@@ -48,7 +47,6 @@ class OrderPage(BasePage):
                              commentary_locator,
                              commentary)
         OrderPage.push_button(self, button_order)
-        #OrderPage.switch_modal(self, modal_locator)
         OrderPage.push_button(self, button_confirmed)
         return OrderPage.get_text_from_element(self, order_text)
 

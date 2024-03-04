@@ -1,5 +1,4 @@
 import pytest
-import allure
 import time
 from test_page_object.pages.order_page import OrderPage
 from ..data import *
@@ -38,8 +37,7 @@ class TestOrderPage:
                                         OrderAnswer.COMMENTARY_1,
                                         OrderPageLocators.BUTTON_ORDER,
                                         OrderPageLocators.BUTTON_CONFIRMED_YES,
-                                        OrderPageLocators.ORDER_MESSAGE,
-                                        OrderPageLocators.MODAL_FRAME)
+                                        OrderPageLocators.ORDER_MESSAGE)
         print(result)
         assert OrderPage.check(result, expected_result)
 
